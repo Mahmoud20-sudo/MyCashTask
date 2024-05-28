@@ -439,7 +439,7 @@ fun CategoryItem(categories: Categories?, viewModel: MainViewModel = hiltViewMod
                 ),
                 modifier = Modifier
                     .align(Alignment.Start)
-                    .padding(start = 20.dp, top = 5.dp, bottom = 20.dp)
+                    .padding(start = 20.dp, top = 5.dp)
             )
         }
     }
@@ -514,8 +514,8 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
 
     Box(
         modifier = modifier
-            .width(136.dp)
-            .height(109.dp),
+            .width(188.dp)
+            .height(162.dp),
         contentAlignment = BottomCenter
     ) {
         AsyncImage(
