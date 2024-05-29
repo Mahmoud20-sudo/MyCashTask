@@ -566,7 +566,7 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
                     Text(
                         text = " $distanceInKilo Km",
                         style = TextStyle(
-                            fontSize = 8.sp,
+                            fontSize = 10.sp,
                             color = Color(0xffFCEFCE),
                             lineHeight = 9.56.sp,
                             letterSpacing = (-0.3).sp,
@@ -595,7 +595,7 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
                     Text(
                         text = " $rate",
                         style = TextStyle(
-                            fontSize = 8.sp,
+                            fontSize = 10.sp,
                             color = Color(0xffFCEFCE),
                             lineHeight = 9.56.sp,
                             letterSpacing = (-0.3).sp,
