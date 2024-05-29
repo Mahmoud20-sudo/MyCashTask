@@ -556,11 +556,13 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
                 val distanceInKilo =
                     runCatching { seller.distance.toInt().div(1000) }.getOrElse { 0 }
 
-                Row(modifier = Modifier.padding(top = 3.dp)) {
+                Row(modifier = Modifier.padding(top = 3.dp, bottom = 2.dp)) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_location),
                         contentDescription = "Loc",
-                        modifier = Modifier.size(8.dp)
+                        modifier = Modifier
+                            .padding(top = 1.dp)
+                            .size(8.dp)
                     )
 
                     Text(
@@ -578,7 +580,7 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
 
             seller?.rate?.let { rate ->
                 Row(
-                    modifier = Modifier.padding(top = 3.dp)
+                    modifier = Modifier
                 ) {
                     RatingBar(
                         value = rate.toFloat(),
@@ -587,7 +589,7 @@ fun PopularItem(seller: Seller?, viewModel: MainViewModel = hiltViewModel()) {
                         onValueChange = {},
                         onRatingChanged = {},
                         spaceBetween = 2.dp,
-                        modifier = Modifier.width(55.dp),
+                        modifier = Modifier.padding(top = 2.dp).width(55.dp),
                         size = 7.dp,
                     )
 
