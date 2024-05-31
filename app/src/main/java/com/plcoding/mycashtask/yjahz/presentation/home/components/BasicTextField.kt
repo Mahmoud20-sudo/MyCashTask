@@ -4,9 +4,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -14,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -25,6 +30,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.plcoding.mycashtask.R
 
 @Composable
 fun BasicTextField(
@@ -40,12 +46,22 @@ fun BasicTextField(
     val focusManager = LocalFocusManager.current
 
     val masked by remember { mutableStateOf(keyboard == KeyboardType.Password) }
-    val visualTransformation by remember(masked) {
-        if (masked)
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+    val visualTransformation by remember(masked, passwordVisibility) {
+        if (masked && !passwordVisibility)
             mutableStateOf(PasswordVisualTransformation())
         else
             mutableStateOf(VisualTransformation.None)
     }
+
+
+    val icon =
+        if (passwordVisibility && (keyboard == KeyboardType.Password))
+            painterResource(id = R.drawable.ic_show_passwoed)
+        else
+            painterResource(id = R.drawable.ic_hide_password)
+
 
     val textStyle = TextStyle(
         fontSize = 16.sp,
@@ -95,6 +111,19 @@ fun BasicTextField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
+        trailingIcon = {
+            if (keyboard == KeyboardType.Password)
+                IconButton(onClick = {
+
+                    passwordVisibility = !passwordVisibility
+                }) {
+                    Icon(
+                        painter = icon,
+                        contentDescription = "Visibility Icon",
+                        modifier = Modifier.padding(end = 5.dp).width(40.dp).height(30.dp)
+                    )
+                }
+        },
         visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(imeAction = imeAction, keyboardType = keyboard),
         keyboardActions = KeyboardActions(
